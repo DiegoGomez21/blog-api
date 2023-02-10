@@ -4,12 +4,13 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from posts.models import Post
 from posts.api.serializers import PostSerializer
 from posts.api.permissions import IsAuthorOrReadOnly
-
+from rest_framework.pagination import PageNumberPagination
 
 class PostApiViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         userr = self.request.user
